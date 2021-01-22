@@ -5,10 +5,12 @@ import boto3
 
 def lambda_handler(event, context):
 
-    ec2_client = boto3.client('ec2')
+   #get list of ec2  instance and region names
+    ec2_client = boto3.client('ec2') 
     regions = [region['RegionName']
                for region in ec2_client.describe_regions()['Regions']]
 
+    #setup resource object in each region
     for region in regions:
 
         print('Instances in EC2 Region {0}:'.format(region))
